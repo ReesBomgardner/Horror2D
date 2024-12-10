@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://hvmfeqa87hye"]
+
+[ext_resource type="Script" path="res://src/scenes/enemy/enemy.gd" id="1_nfxic"]
+[ext_resource type="Texture2D" uid="uid://7lh5jw3ajqmm" path="res://src/assets/enemies/PlayerA.png" id="2_a7sxi"]
+[ext_resource type="Texture2D" uid="uid://qq5v6syawvlh" path="res://src/assets/images/256x256 textures (63).png" id="2_bj4d0"]
+[ext_resource type="Texture2D" uid="uid://c7ak10l0fjt4a" path="res://src/assets/images/flashlight_reverse.png" id="3_ric63"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l1ikq"]
+height = 78.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5630f"]
+radius = 53.6004
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6dqu8"]
+radius = 742.003
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1dqg"]
+radius = 71.007
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+y_sort_enabled = true
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_nfxic")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_a7sxi")
+region_rect = Rect2(7, 12, 16, 34)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 96)
+energy = 0.4
+shadow_enabled = true
+shadow_color = Color(1, 0, 0, 0)
+texture = ExtResource("2_bj4d0")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(-36, -101)
+scale = Vector2(0.8, 1)
+color = Color(0.956863, 0, 0, 1)
+energy = 2.0
+texture = ExtResource("3_ric63")
+texture_scale = 0.1
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(36, -101)
+scale = Vector2(0.8, 1)
+color = Color(0.956863, 0, 0, 1)
+energy = 2.0
+texture = ExtResource("3_ric63")
+texture_scale = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 96)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_l1ikq")
+disabled = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="TeleportArea" type="Area2D" parent="." groups=["enemy"]]
+position = Vector2(0, 56)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportArea"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_5630f")
+
+[node name="DetectArea" type="Area2D" parent="."]
+position = Vector2(0, 56)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+position = Vector2(0, -56)
+shape = SubResource("CircleShape2D_6dqu8")
+
+[node name="HitArea" type="Area2D" parent="."]
+position = Vector2(0, 56)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_m1dqg")
+
+[node name="TakeHitTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]
+[connection signal="timeout" from="TakeHitTimer" to="." method="_on_take_hit_timer_timeout"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqmvxc2dfwtjb"]
+
+[ext_resource type="Script" path="res://src/scenes/dialogues/story_intro/story_intro.gd" id="1_e7egy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxdxd"]
+font_size = 32
+
+[node name="StoryIntro" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e7egy")
+world = "res://src/scenes/world/world.tscn"
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "This is a story about a young girl and her dad"
+label_settings = SubResource("LabelSettings_oxdxd")

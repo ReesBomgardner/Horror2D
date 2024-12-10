@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwwswx28wgsdh"
+path="res://.godot/imported/Crin [BG FX] 104 seconds.wav-c762c619d9d83ccb354799751bf6a97f.sample"
+
+[deps]
+
+source_file="res://src/assets/sounds/Crin [BG FX] 104 seconds.wav"
+dest_files=["res://.godot/imported/Crin [BG FX] 104 seconds.wav-c762c619d9d83ccb354799751bf6a97f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

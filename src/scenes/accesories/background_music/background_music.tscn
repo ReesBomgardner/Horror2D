@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfdx42qlcfmh0"]
+
+[ext_resource type="AudioStream" uid="uid://cl7bel4dn62xx" path="res://src/assets/sounds/2- Mental Vortex.ogg" id="1_aidrp"]
+[ext_resource type="Script" path="res://src/scenes/accesories/background_music/background_music.gd" id="1_wjtux"]
+[ext_resource type="AudioStream" uid="uid://cwwswx28wgsdh" path="res://src/assets/sounds/Crin [BG FX] 104 seconds.wav" id="2_cgvpg"]
+[ext_resource type="AudioStream" uid="uid://b16vyb3fnjcsd" path="res://src/assets/sounds/Creaking Door (7).mp3" id="3_6j8vl"]
+[ext_resource type="AudioStream" uid="uid://bk863sjw5jjl8" path="res://src/assets/sounds/DoorLocked.ogg" id="5_8wphy"]
+
+[node name="BackgroundMusic" type="Node2D"]
+script = ExtResource("1_wjtux")
+
+[node name="BgMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_aidrp")
+autoplay = true
+
+[node name="BgMusic2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_cgvpg")
+
+[node name="DoorSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6j8vl")
+volume_db = -20.0
+
+[node name="DoorLockedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8wphy")
+volume_db = 20.0

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3smj1vbt8s3o"]
+
+[ext_resource type="PackedScene" uid="uid://bqmvxc2dfwtjb" path="res://src/scenes/dialogues/story_intro/story_intro.tscn" id="1_dh6ay"]
+
+[node name="StoryOutro" instance=ExtResource("1_dh6ay")]
+outro = true
+world = "res://src/scenes/menus/main_menu/main_menu.tscn"

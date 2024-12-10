@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxqg2txc4hcjt"]
+
+[ext_resource type="Script" path="res://src/scenes/menus/transition/transition.gd" id="1_onhlq"]
+[ext_resource type="AudioStream" uid="uid://b16vyb3fnjcsd" path="res://src/assets/sounds/Creaking Door (7).mp3" id="2_tu8ie"]
+
+[sub_resource type="Animation" id="Animation_a1yfb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ae5y0"]
+resource_name = "intro"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2dqu2"]
+_data = {
+"RESET": SubResource("Animation_a1yfb"),
+"intro": SubResource("Animation_ae5y0")
+}
+
+[node name="Transition" type="Control"]
+process_mode = 3
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_onhlq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2dqu2")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tu8ie")
+volume_db = -10.0
+
+[connection signal="navigate" from="." to="." method="_on_navigate"]

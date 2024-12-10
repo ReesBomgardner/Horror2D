@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0lwrsfr3yf2p"]
+
+[ext_resource type="Script" path="res://src/scenes/accesories/door/door.gd" id="1_e62mq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sic3y"]
+radius = 63.0714
+
+[node name="Door" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_e62mq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sic3y")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

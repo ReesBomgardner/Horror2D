@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://blkkekgyodg05"]
+
+[ext_resource type="Script" path="res://src/scenes/menus/main_menu/main_menu.gd" id="1_bgi7g"]
+[ext_resource type="FontFile" uid="uid://nqxeto1utvc1" path="res://src/assets/fonts/bloodlust.ttf" id="2_solfe"]
+[ext_resource type="FontFile" uid="uid://6fpashtqjktp" path="res://src/assets/fonts/Funkrocker.otf" id="3_vawac"]
+[ext_resource type="PackedScene" uid="uid://bn1ck4ttute54" path="res://src/scenes/menus/settings_menu/settings_menu.tscn" id="5_kbhqn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_anlch"]
+font = ExtResource("2_solfe")
+font_size = 300
+
+[sub_resource type="InputEventKey" id="InputEventKey_bs8v0"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_0wi4d"]
+events = [SubResource("InputEventKey_bs8v0")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yd1x0"]
+font = ExtResource("3_vawac")
+font_size = 24
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bgi7g")
+world = "res://src/scenes/world/world.tscn"
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0338533, 0.0338533, 0.0338533, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "HUNTED"
+label_settings = SubResource("LabelSettings_anlch")
+
+[node name="Menu" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer/Menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vawac")
+theme_override_font_sizes/font_size = 32
+shortcut = SubResource("Shortcut_0wi4d")
+text = "PLAY"
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer/Menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vawac")
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="SettingsMenu" parent="GUI" instance=ExtResource("5_kbhqn")]
+
+[node name="TimePlayedLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -201.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Time Played: 0s"
+label_settings = SubResource("LabelSettings_yd1x0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Menu/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Menu/OptionsButton" to="." method="_on_options_button_pressed"]

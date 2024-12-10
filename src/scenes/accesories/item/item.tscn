@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ub6s7a83a0w"]
+
+[ext_resource type="Script" path="res://src/scenes/accesories/item/item.gd" id="1_kl3el"]
+[ext_resource type="Texture2D" uid="uid://bn8p4qq0b4h3n" path="res://src/assets/characters/Shadow.png" id="2_ifjm2"]
+[ext_resource type="Texture2D" uid="uid://281phr5j7yiw" path="res://src/assets/icons/KeyIcons.png" id="3_7rj1p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkng5"]
+radius = 48.0104
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_kl3el")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("3_7rj1p")
+region_enabled = true
+region_rect = Rect2(97, 1, 29, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_mkng5")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.654902)
+show_behind_parent = true
+position = Vector2(-3, -8)
+scale = Vector2(5, 5)
+texture = ExtResource("2_ifjm2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
